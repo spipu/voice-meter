@@ -6,7 +6,6 @@ PWA minimaliste : un sonomètre pour savoir si on parle trop fort.
 
 ### Mise à jour automatique
 
-* `website/appServiceWorker.js` et tout `website/js/webapp/` (`appBootstrap.js`, `appTranslator.js`, `screenWakeLock.js`) sont repris tels quels de `../doom-js` : les garder alignés, ne jamais les modifier ici.
 * Au démarrage, `appBootstrap` compare la `version` de `website/js/app/libBootstrap.json` (lue sur le serveur, hors cache) à celle mémorisée ; si elle diffère, le service worker vide son cache et la page se recharge.
 * **Incrémenter la `version` de `libBootstrap.json` à chaque modification d'un fichier de `website/`**, y compris CSS, HTML, manifest, `appBootstrap.js` et `appServiceWorker.js`. Sans l'incrément, les clients installés restent sur l'ancienne version.
 * Tout nouveau fichier JS est déclaré dans `libBootstrap.json` ; l'ordre de déclaration est l'ordre de chargement.

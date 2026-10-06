@@ -24,5 +24,5 @@ Puis ouvrir http://localhost:8000/ (le micro exige `localhost` ou HTTPS).
 
 * `serve.py` : micro serveur de test.
 * `website/` : l'application, servie telle quelle à la racine du domaine.
-* `website/js/webapp/` : briques reprises de doom-js (chargement et mise à jour automatique, traductions, écran maintenu allumé).
+* `website/js/webapp/` : briques génériques de la PWA (chargement et mise à jour automatique, traductions, écran maintenu allumé).
 * `website/js/app/` : le sonomètre.
