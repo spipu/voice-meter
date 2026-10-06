@@ -1,0 +1,28 @@
+{
+ "name": "Voice Meter",
+ "short_name": "Voice Meter",
+ "description": "Est-ce que je parle trop fort ?",
+ "theme_color": "#0b0f14",
+ "background_color": "#0b0f14",
+ "display": "standalone",
+ "orientation": "portrait",
+ "start_url": "/",
+ "lang": "fr",
+ "icons": [
+  {
+   "src": "/icon/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "/icon/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "/icon/icon.svg",
+   "sizes": "any",
+   "type": "image/svg+xml"
+  }
+ ]
+}

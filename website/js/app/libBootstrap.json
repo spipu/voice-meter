@@ -1,0 +1,28 @@
+{
+    "version": "v1.14",
+    "files": {
+        "assets": [],
+        "css": [],
+        "js": [
+            "/js/webapp/appTranslator.js",
+            "/js/webapp/screenWakeLock.js",
+            "/js/app/voiceMeterTranslations.js",
+            "/js/app/voiceMeterLanguage.js",
+            "/js/app/voiceMeterDom.js",
+            "/js/app/voiceMeterDuration.js",
+            "/js/app/voiceMeterDecibel.js",
+            "/js/app/voiceMeterThresholds.js",
+            "/js/app/voiceMeterMicrophone.js",
+            "/js/app/voiceMeterPowerHistory.js",
+            "/js/app/voiceMeterPowerTotal.js",
+            "/js/app/voiceMeterSampler.js",
+            "/js/app/voiceMeterGauge.js",
+            "/js/app/voiceMeterAveragesPanel.js",
+            "/js/app/voiceMeterHistoryChart.js",
+            "/js/app/voiceMeterThresholdsPanel.js",
+            "/js/app/voiceMeterScreen.js",
+            "/js/app/voiceMeterApp.js",
+            "/js/app/main.js"
+        ]
+    }
+}

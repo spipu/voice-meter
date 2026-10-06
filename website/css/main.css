@@ -1,0 +1,361 @@
+:root {
+    --bg:           #0b0f14;
+    --panel:        #151b23;
+    --border:       #242c37;
+    --text:         #e6edf3;
+    --text-muted:   #8b96a3;
+    --zone-silence: #6b7280;
+    --zone-low:     #3b82f6;
+    --zone-good:    #22c55e;
+    --zone-loud:    #eab308;
+    --zone-tooLoud: #ef4444;
+    --zone-color:   var(--border);
+}
+
+/* Every component reads --zone-color: a data-zone attribute is all it takes to colour it. */
+[data-zone="silence"] { --zone-color: var(--zone-silence); }
+[data-zone="low"]     { --zone-color: var(--zone-low); }
+[data-zone="good"]    { --zone-color: var(--zone-good); }
+[data-zone="loud"]    { --zone-color: var(--zone-loud); }
+[data-zone="tooLoud"] { --zone-color: var(--zone-tooLoud); }
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica", sans-serif;
+}
+
+#screen {
+    width: 100vw;
+    height: 100vh;  /* fallback for browsers without dvh support */
+    height: 100dvh; /* dynamic viewport - iOS Safari toolbar */
+}
+
+/* ---------- Loading ---------- */
+
+#progressBarContainer {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    padding: 40px;
+}
+
+.loading-brand {
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+}
+
+.loading-bar-track {
+    width: 100%;
+    max-width: 320px;
+    height: 6px;
+    background: var(--panel);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+#progressBar {
+    width: 0;
+    height: 100%;
+    background: var(--zone-good);
+    transition: width 0.15s;
+}
+
+/* ---------- Layout ---------- */
+
+.app {
+    position: relative;
+    height: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: max(12px, env(safe-area-inset-top)) 16px max(12px, env(safe-area-inset-bottom));
+}
+
+.start-view,
+.meter-view {
+    height: 100%;
+    flex-direction: column;
+}
+
+.start-view {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
+
+.meter-view {
+    display: none;
+    gap: 12px;
+}
+
+.app.listening .start-view {
+    display: none;
+}
+
+.app.listening .meter-view {
+    display: flex;
+}
+
+/* ---------- Buttons ---------- */
+
+/* One style for every button; each class below only sets its size and place. */
+button {
+    font: inherit;
+    font-weight: 600;
+    background: transparent;
+    border: 1px solid var(--zone-low);
+    border-radius: 10px;
+    color: var(--zone-low);
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+button:disabled {
+    opacity: 0.6;
+}
+
+.btn-language {
+    position: absolute;
+    top: max(12px, env(safe-area-inset-top));
+    left: 16px;
+    z-index: 1;
+    padding: 4px 10px;
+    font-size: 0.8em;
+    letter-spacing: 1px;
+}
+
+.btn-listen {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    font-size: 1.6em;
+}
+
+.actions {
+    flex: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.actions button {
+    padding: 10px;
+}
+
+.error {
+    max-width: 300px;
+    text-align: center;
+    color: var(--zone-tooLoud);
+}
+
+/* ---------- Gauge and averages ---------- */
+
+.level-row {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    gap: 8px;
+}
+
+.gauge-container {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gauge {
+    width: 100%;
+    height: 100%;
+}
+
+.gauge-zone {
+    fill: none;
+    stroke: var(--zone-color);
+    stroke-width: 16;
+}
+
+.gauge-graduations line {
+    stroke: var(--text-muted);
+    stroke-width: 1;
+}
+
+.gauge-graduations line.major {
+    stroke: var(--text);
+    stroke-width: 1.5;
+}
+
+.gauge-graduations text {
+    fill: var(--text-muted);
+    font-size: 8px;
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+
+/* Origin = VoiceMeterGauge.CX / CY. */
+.gauge-needle {
+    transform-box: view-box;
+    transform-origin: 100px 96px;
+    transition: transform 0.05s linear;
+}
+
+.gauge-needle line {
+    stroke: var(--text);
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+
+.gauge-needle circle {
+    fill: var(--text);
+}
+
+.gauge-value {
+    fill: var(--text);
+    font-size: 22px;
+    font-weight: 700;
+    text-anchor: middle;
+    font-variant-numeric: tabular-nums;
+}
+
+.gauge-label {
+    fill: var(--zone-color);
+    font-size: 11px;
+    font-weight: 600;
+    text-anchor: middle;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.averages {
+    flex: none;
+    width: 76px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+}
+
+.average {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 4px;
+    border-radius: 10px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--zone-color);
+}
+
+.average-value {
+    font-size: 1.6em;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.average[data-zone]:not([data-zone=""]) .average-value {
+    color: var(--zone-color);
+}
+
+.average-title {
+    font-size: 0.75em;
+    color: var(--text-muted);
+}
+
+/* ---------- History ---------- */
+
+.history {
+    position: relative;
+    flex: none;
+    height: clamp(64px, 14dvh, 120px);
+    border-radius: 10px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.history-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.history-title {
+    position: absolute;
+    top: 4px;
+    left: 8px;
+    font-size: 0.7em;
+    color: var(--text-muted);
+}
+
+/* ---------- Thresholds ---------- */
+
+.thresholds {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+}
+
+.threshold {
+    display: grid;
+    grid-template-columns: 7.5em 1fr 3.5em;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85em;
+}
+
+.threshold-name {
+    color: var(--text-muted);
+}
+
+.threshold-value {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.threshold input {
+    width: 100%;
+    accent-color: var(--zone-color);
+}
+
+@media (max-height: 560px) {
+    .meter-view    { gap: 6px; }
+    .average       { padding: 4px; }
+    .average-value { font-size: 1.2em; }
+    .history       { height: 56px; }
+    .actions button { padding: 6px; }
+}
