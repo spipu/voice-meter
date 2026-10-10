@@ -15,14 +15,13 @@ Les dB affichés sont indicatifs : le micro n'est pas calibré.
 ## Tester en local
 
 ```
-python serve.py
+python3 -m http.server 8080 --directory website
 ```
 
-Puis ouvrir http://localhost:8000/ (le micro exige `localhost` ou HTTPS).
+Puis ouvrir http://localhost:8080/ (le micro exige `localhost` ou HTTPS).
 
 ## Arborescence
 
-* `serve.py` : micro serveur de test.
 * `website/` : l'application, servie telle quelle à la racine du domaine.
 * `website/js/webapp/` : briques génériques de la PWA (chargement et mise à jour automatique, traductions, écran maintenu allumé).
 * `website/js/app/` : le sonomètre.
