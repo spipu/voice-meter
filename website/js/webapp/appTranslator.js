@@ -3,10 +3,10 @@
  * current language and reads every user-facing text by code.
  *
  * A catalog is a flat map of dotted codes to their translations:
- *   {'zone.loud': {fr: 'Trop fort', en: 'Too loud'}, …}
+ *   {'button.close': {fr: 'Fermer', en: 'Close'}, …}
  *
  * Parameterised texts carry {placeholders} filled from the params object:
- *   get('history.title', {duration: '5 min'}) → 'Niveau sur 5 min'
+ *   get('item.count', {count: 3}) → '3 éléments'
  *
  * An unknown code returns the code itself, a missing translation falls back to
  * the fallback language, and each problem is logged once.
