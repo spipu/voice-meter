@@ -1,5 +1,5 @@
 {
-    "version": "v1.20",
+    "version": "v1.21",
     "files": {
         "assets": [],
         "css": [],
@@ -22,7 +22,7 @@
             "/js/app/voiceMeterThresholdsPanel.js",
             "/js/app/voiceMeterScreen.js",
             "/js/app/voiceMeterApp.js",
-            "/js/app/main.js"
+            "/js/main.js"
         ]
     }
 }
