@@ -15,10 +15,10 @@ Les dB affichés sont indicatifs : le micro n'est pas calibré.
 ## Tester en local
 
 ```
-python3 -m http.server 8080 --directory website
+python3 -m http.server 8083 --directory website
 ```
 
-Puis ouvrir http://localhost:8080/ (le micro exige `localhost` ou HTTPS).
+Puis ouvrir http://localhost:8083/ (le micro exige `localhost` ou HTTPS).
 
 ## Arborescence
 
