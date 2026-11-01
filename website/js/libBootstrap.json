@@ -1,11 +1,12 @@
 {
-    "version": "v1.25",
+    "version": "v1.26",
     "files": {
         "assets": [],
         "css": [],
         "js": [
             "/js/webapp/appTranslator.js",
             "/js/webapp/screenWakeLock.js",
+            "/js/webapp/appPlatform.js",
             "/js/app/voiceMeterTranslations.js",
             "/js/app/voiceMeterLanguage.js",
             "/js/app/voiceMeterDom.js",
